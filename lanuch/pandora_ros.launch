@@ -1,0 +1,18 @@
+<launch>
+	<arg name="server_ip" default="172.31.2.165"/>
+	<arg name="server_port"  default="9870"/>
+	<arg name="lidra_recv_port"  default="8080"/>
+	<arg name="gps_port"  default="10110"/>
+	<arg name="start_angle"  default="0"/>
+	<arg name="lidar_correction_file"  default=""/>
+
+	<node pkg="pandora_ros" name="pandora_ros" type="pandora_ros_node" output="screen" >
+		<param name="server_ip" type="string" value="$(arg server_ip)"/>
+		<param name="server_port"  type="int" value="$(arg server_port)"/>
+		<param name="calbration_file" type="string" value="$(find pandora_ros)/config/calibration.yml"/>
+		<param name="lidra_recv_port"  type="int" value="$(arg lidra_recv_port)"/>
+		<param name="gps_port"  type="int" value="$(arg gps_port)"/>
+		<param name="start_angle"  type="double" value="$(arg start_angle)"/>
+		<param name="lidar_correction_file"  type="string" value="$(find pandora_ros)/config/correction.csv"/>
+	</node>
+</launch>
