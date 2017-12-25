@@ -67,7 +67,6 @@ public:
     imgMsg->header.stamp = ros::Time(timestamp);
     imgPublishers[pic_id].publish(imgMsg);
 
-
   }
 
   void lidarCallback(boost::shared_ptr<PPointCloud> cld, double timestamp)

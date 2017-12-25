@@ -13,7 +13,6 @@ find_package(catkin REQUIRED COMPONENTS
 find_package( Boost REQUIRED )
 find_package(PCL REQUIRED )
 
-
 catkin_package()
 
 add_executable(pandora_ros_node 
@@ -27,8 +26,23 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
 )
 
+execute_process(COMMAND lsb_release -rs OUTPUT_VARIABLE OS_VERSION)
+message (${OS_VERSION})
+
+if(OS_VERSION EQUAL 14.04)
+set(pandoraSDK 14.04/libpandoraSDK.so)
+
+elseif(OS_VERSION EQUAL 16.04)
+set(pandoraSDK 16.04/libpandoraSDK.so)
+
+else()
+message (wrong os_version)
+
+endif()
+
+message("${CMAKE_SOURCE_DIR}/lib/${pandoraSDK}")
 
 target_link_libraries(pandora_ros_node 
 	${catkin_LIBRARIES}
-  pandoraSDK
+  ${CMAKE_SOURCE_DIR}/lib/${pandoraSDK}
 )
