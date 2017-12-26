@@ -13,11 +13,11 @@ public:
     lidarPublisher = node.advertise<sensor_msgs::PointCloud2>("pandar_points", 10);
 
     image_transport::ImageTransport it(nh);
-    imgPublishers[0] = it.advertise("pandora/pandora_camera0", 1);
-    imgPublishers[1] = it.advertise("pandora/pandora_camera1", 1);
-    imgPublishers[2] = it.advertise("pandora/pandora_camera2", 1);
-    imgPublishers[3] = it.advertise("pandora/pandora_camera3", 1);
-    imgPublishers[4] = it.advertise("pandora/pandora_camera4", 1);
+    imgPublishers[0] = it.advertise("pandora_camera0", 1);
+    imgPublishers[1] = it.advertise("pandora_camera1", 1);
+    imgPublishers[2] = it.advertise("pandora_camera2", 1);
+    imgPublishers[3] = it.advertise("pandora_camera3", 1);
+    imgPublishers[4] = it.advertise("pandora_camera4", 1);
 
     std::string serverIp;
     int serverPort;
