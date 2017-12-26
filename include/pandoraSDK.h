@@ -32,11 +32,6 @@ public:
 		boost::function<void(boost::shared_ptr<cv::Mat> matp, double timestamp, int pic_id)> cameraCallback,
 		boost::function<void(boost::shared_ptr<PPointCloud> pcloudp, double timestamp)> lidarCallback);
 
-	PandoraSDK(
-		const std::string pcapPath,
-		const std::string lidarCorrectionFile,
-		const double startAngle,
-		boost::function<void(boost::shared_ptr<PPointCloud> pcloudp, double timestamp)> lidarCallback);
 
 	PandoraSDK(){};
 
