@@ -10,7 +10,7 @@ make -j4
 source devel/setup.sh
 roslaunch pandora_ros pandora_ros.launch
 ```
-运行成功后将有6个的topic:
+运行成功后将有6个topic:
 ```
 /pandar_points
 /pandora_ros/pandora_camera0
