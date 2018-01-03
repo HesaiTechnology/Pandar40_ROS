@@ -52,7 +52,7 @@ public:
     switch (pic_id)
     {
     case 0:
-      imgMsg = cv_bridge::CvImage(std_msgs::Header(), "rgb8", *matp).toImageMsg();
+      imgMsg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", *matp).toImageMsg();
       break;
     case 1:
     case 2:
