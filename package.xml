@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>pandora_ros</name>
+  <name>hesai_lidar</name>
   <version>0.0.0</version>
-  <description>The pandora_ros package</description>
+  <description>The hesai_lidar package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

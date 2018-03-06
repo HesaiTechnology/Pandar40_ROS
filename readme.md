@@ -8,20 +8,20 @@ cd build
 cmake ..
 make -j4
 source devel/setup.sh
-roslaunch pandora_ros pandora_ros.launch
+roslaunch hesai_lidar pandora_ros.launch
 ```
 运行成功后将有6个topic:
 ```
 /pandar_points
-/pandora_ros/pandora_camera0
-/pandora_ros/pandora_camera1
-/pandora_ros/pandora_camera2
-/pandora_ros/pandora_camera3
-/pandora_ros/pandora_camera4
+/hesai_lidar/pandora_camera0
+/hesai_lidar/pandora_camera1
+/hesai_lidar/pandora_camera2
+/hesai_lidar/pandora_camera3
+/hesai_lidar/pandora_camera4
 ```
 
 ## (2)参数说明:
-运行时可设置的参数可在lanuch/pandora_ros.lanuch中查看:
+运行时可设置的参数可在lanuch/hesai_lidar.lanuch中查看:
 ```
 	<arg name="server_ip" default="192.168.20.51"/> pandora的ip
 	<arg name="server_port"  default="9870"/>       pandora的tcp连接端口
@@ -31,12 +31,12 @@ roslaunch pandora_ros pandora_ros.launch
 
   ......
 
-	<param name="calbration_file" type="string" value="$(find pandora_ros)/config/calibration.yml"/>  摄像头的矫正文件路径,文件不存在时输出的图像是未经矫正的
-	<param name="lidar_correction_file"  type="string" value="$(find pandora_ros)/config/correction.csv"/> lidar的矫正文件路径,文件不存在时,使用默认的矫正参数
+	<param name="calbration_file" type="string" value="$(find hesai_lidar)/config/calibration.yml"/>  摄像头的矫正文件路径,文件不存在时输出的图像是未经矫正的
+	<param name="lidar_correction_file"  type="string" value="$(find hesai_lidar)/config/correction.csv"/> lidar的矫正文件路径,文件不存在时,使用默认的矫正参数
 
 ```
 例如:
 ```
-roslaunch pandora_ros pandora_ros.launch server_ip:=172.32.2.111
+roslaunch hesai_lidar panodra_ros.launch server_ip:=172.32.2.111
 ```
 表示所要连接的pandora的ip是172.32.2.111
