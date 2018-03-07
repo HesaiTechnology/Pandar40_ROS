@@ -40,9 +40,9 @@ message (wrong os_version)
 
 endif()
 
-message("${CMAKE_SOURCE_DIR}/lib/pandoraSDK/lib/${libhesaiLidarSDK}")
+message("${CMAKE_CURRENT_SOURCE_DIR}/lib/pandoraSDK/lib/${libhesaiLidarSDK}")
 
 target_link_libraries(hesai_lidar_node 
 	${catkin_LIBRARIES}
-  ${CMAKE_SOURCE_DIR}/lib/pandoraSDK/lib/${libhesaiLidarSDK}
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/pandoraSDK/lib/${libhesaiLidarSDK}
 )

@@ -13,13 +13,6 @@ public:
   {
     lidarPublisher = node.advertise<sensor_msgs::PointCloud2>("pandar_points", 10);
 
-    image_transport::ImageTransport it(nh);
-    imgPublishers[0] = it.advertise("pandora_camera0", 1);
-    imgPublishers[1] = it.advertise("pandora_camera1", 1);
-    imgPublishers[2] = it.advertise("pandora_camera2", 1);
-    imgPublishers[3] = it.advertise("pandora_camera3", 1);
-    imgPublishers[4] = it.advertise("pandora_camera4", 1);
-
     string serverIp;
     int serverPort;
     string calibrationFile;
@@ -31,6 +24,8 @@ public:
 		int laserCount;
 		int pclDataType;
     string pcapFile;
+    image_transport::ImageTransport it(nh);
+
     
     nh.getParam("pcap_file", pcapFile);
     nh.getParam("server_ip", serverIp);
@@ -43,6 +38,9 @@ public:
     nh.getParam("laser_return_type", laserReturnType);
     nh.getParam("laser_count", laserCount);
     nh.getParam("pcldata_type", pclDataType);
+
+    // pcapFile = "/home/pandora/Desktop/pandar40p.pcap";
+    
     if(!pcapFile.empty())
     {
       hsdk = new HesaiLidarSDK(pcapFile, lidarCorrectionFile, laserReturnType, laserCount, pclDataType,
@@ -50,6 +48,7 @@ public:
     }
     else if(serverIp.empty())
     {
+      
       hsdk = new HesaiLidarSDK(lidarRecvPort, gpsPort, lidarCorrectionFile,
                       boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2),
                       NULL, laserReturnType, laserCount, pclDataType);
@@ -57,12 +56,18 @@ public:
 
     else
     {
-      hsdk = new HesaiLidarSDK(serverIp, serverPort, lidarRecvPort, gpsPort, startAngle,
-                      calibrationFile,
-                      lidarCorrectionFile,
-                      boost::bind(&HesaiLidarClient::cameraCallback, this, _1, _2, _3),
-                      boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2),
-                      NULL, laserReturnType, laserCount, pclDataType);
+      imgPublishers[0] = it.advertise("/pandora_camera0", 1);
+      imgPublishers[1] = it.advertise("/pandora_camera1", 1);
+      imgPublishers[2] = it.advertise("/pandora_camera2", 1);
+      imgPublishers[3] = it.advertise("/pandora_camera3", 1);
+      imgPublishers[4] = it.advertise("/pandora_camera4", 1);
+      hsdk = new HesaiLidarSDK(serverIp, serverPort, calibrationFile,
+            boost::bind(&HesaiLidarClient::cameraCallback, this, _1, _2, _3),
+            lidarRecvPort, 
+            gpsPort, startAngle,      
+            lidarCorrectionFile,
+            boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2),
+            NULL, laserReturnType, laserCount, pclDataType);
     }
     hsdk->start();
   }
@@ -75,13 +80,13 @@ public:
     switch (pic_id)
     {
     case 0:
-      imgMsg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", *matp).toImageMsg();
+      imgMsg = cv_bridge::CvImage(std_msgs::Header(), "rgb8", *matp).toImageMsg();
       break;
     case 1:
     case 2:
     case 3:
     case 4:
-      imgMsg = cv_bridge::CvImage(std_msgs::Header(), "rgb8", *matp).toImageMsg();
+      imgMsg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", *matp).toImageMsg();
       break;
     default:
       ROS_INFO("picid wrong in getImageToPub");
