@@ -3,6 +3,8 @@
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <pcl_conversions/pcl_conversions.h>
+
+#define HESAI_WITH_CAMERA
 #include "hesaiLidarSDK.h"
 using namespace std;
 
@@ -43,7 +45,7 @@ public:
     
     if(!pcapFile.empty())
     {
-      hsdk = new HesaiLidarSDK(pcapFile, lidarCorrectionFile, laserReturnType, laserCount, pclDataType,
+      hsdk = new HesaiLidarSDK(pcapFile, lidarCorrectionFile, (HesaiLidarRawDataSturct)laserReturnType, laserCount, (HesaiLidarPCLDataType)pclDataType,
                       boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2));
     }
     else if(serverIp.empty())
@@ -51,7 +53,7 @@ public:
       
       hsdk = new HesaiLidarSDK(lidarRecvPort, gpsPort, lidarCorrectionFile,
                       boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2),
-                      NULL, laserReturnType, laserCount, pclDataType);
+                      NULL, (HesaiLidarRawDataSturct)laserReturnType, laserCount, (HesaiLidarPCLDataType)pclDataType);
     }
 
     else
@@ -67,7 +69,7 @@ public:
             gpsPort, startAngle,      
             lidarCorrectionFile,
             boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2),
-            NULL, laserReturnType, laserCount, pclDataType);
+            NULL, (HesaiLidarRawDataSturct)laserReturnType, laserCount, (HesaiLidarPCLDataType)pclDataType);
     }
     hsdk->start();
   }

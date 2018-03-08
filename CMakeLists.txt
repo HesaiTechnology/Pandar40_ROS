@@ -20,29 +20,19 @@ add_executable(hesai_lidar_node
 )
 
 include_directories(
-  lib/pandoraSDK
+  src/HesaiLidarSDK/include
   ${PCL_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
 )
 
-execute_process(COMMAND lsb_release -rs OUTPUT_VARIABLE OS_VERSION)
-message (${OS_VERSION})
+set(Camera_Enable ON)
 
-if(OS_VERSION EQUAL 14.04)
-set(libhesaiLidarSDK 14.04/libhesaiLidarSDK.so)
-
-elseif(OS_VERSION EQUAL 16.04)
-set(libhesaiLidarSDK 16.04/libhesaiLidarSDK.so)
-
-else()
-message (wrong os_version)
-
-endif()
+add_subdirectory(src/HesaiLidarSDK)
 
 message("${CMAKE_CURRENT_SOURCE_DIR}/lib/pandoraSDK/lib/${libhesaiLidarSDK}")
 
 target_link_libraries(hesai_lidar_node 
 	${catkin_LIBRARIES}
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/pandoraSDK/lib/${libhesaiLidarSDK}
+  	hesaiLidarSDK
 )
