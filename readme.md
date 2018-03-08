@@ -1,42 +1,45 @@
-# pandora-ros使用说明：
-**注意:仅支持64位ubuntu16.04和64位ubuntu14.04**
-## (1) 运行方法:
-cd到项目目录,然后执行以下命令运行:
+## Build
 ```
-mkdir build
-cd build
-cmake ..
-make -j4
-source devel/setup.sh
-roslaunch hesai_lidar pandora_ros.launch
-```
-运行成功后将有6个topic:
-```
-/pandar_points
-/hesai_lidar/pandora_camera0
-/hesai_lidar/pandora_camera1
-/hesai_lidar/pandora_camera2
-/hesai_lidar/pandora_camera3
-/hesai_lidar/pandora_camera4
+catkin_make
 ```
 
-## (2)参数说明:
-运行时可设置的参数可在lanuch/hesai_lidar.lanuch中查看:
+## Run
+### Pandar40
 ```
-	<arg name="server_ip" default="192.168.20.51"/> pandora的ip
-	<arg name="server_port"  default="9870"/>       pandora的tcp连接端口
-	<arg name="lidra_recv_port"  default="8080"/>   lidar数据的接收端口
-	<arg name="gps_port"  default="10110"/>         gps数据的接收端口
-	<arg name="start_angle"  default="0"/>          lidar起始旋转角度
+roslaunch hesai_lidar p40.launch
+```
+
+### Pandar40P
+```
+roslaunch hesai_lidar p40p.launch
+```
+
+### Pandora
+```
+roslaunch hesai_lidar pandora_ros.launch
+```
+
+There is 6 node of Hesai Lidar ROS
+```
+/pandar_points
+/hesai_lidar/pandora_camera0 (Only Pandora)
+/hesai_lidar/pandora_camera1 (Only Pandora)
+/hesai_lidar/pandora_camera2 (Only Pandora)
+/hesai_lidar/pandora_camera3 (Only Pandora)
+/hesai_lidar/pandora_camera4 (Only Pandora)
+```
+
+## Parameters:
+```
+	<arg name="server_ip" default="192.168.20.51"/> pandora's ip
+	<arg name="server_port"  default="9870"/>       pandora's camera port
+	<arg name="lidra_recv_port"  default="8080"/>   lidar's port
+	<arg name="gps_port"  default="10110"/>         gps's port
+	<arg name="start_angle"  default="0"/>          lidar's start angle
 
   ......
 
-	<param name="calbration_file" type="string" value="$(find hesai_lidar)/config/calibration.yml"/>  摄像头的矫正文件路径,文件不存在时输出的图像是未经矫正的
-	<param name="lidar_correction_file"  type="string" value="$(find hesai_lidar)/config/correction.csv"/> lidar的矫正文件路径,文件不存在时,使用默认的矫正参数
+	<param name="calbration_file" type="string" value="$(find hesai_lidar)/config/calibration.yml"/>  Calibration of Camera (Pandora Only, instrinsic and exstrinsic)
+	<param name="lidar_correction_file"  type="string" value="$(find hesai_lidar)/config/correction.csv"/> Calibration of Lidar
 
 ```
-例如:
-```
-roslaunch hesai_lidar panodra_ros.launch server_ip:=172.32.2.111
-```
-表示所要连接的pandora的ip是172.32.2.111
