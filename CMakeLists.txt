@@ -4,11 +4,16 @@ project(hesai_lidar)
 # Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
+
+
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
   sensor_msgs
 )
+
+set(Camera_Enable ON)
+add_subdirectory(src/HesaiLidarSDK)
 
 find_package( Boost REQUIRED )
 find_package(PCL REQUIRED )
@@ -19,6 +24,7 @@ add_executable(hesai_lidar_node
 	src/main.cc
 )
 
+add_definitions("-DHESAI_WITH_CAMERA")
 include_directories(
   src/HesaiLidarSDK/include
   ${PCL_INCLUDE_DIRS}
@@ -26,11 +32,7 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
 )
 
-set(Camera_Enable ON)
 
-add_subdirectory(src/HesaiLidarSDK)
-
-message("${CMAKE_CURRENT_SOURCE_DIR}/lib/pandoraSDK/lib/${libhesaiLidarSDK}")
 
 target_link_libraries(hesai_lidar_node 
 	${catkin_LIBRARIES}

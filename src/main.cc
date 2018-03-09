@@ -4,7 +4,6 @@
 #include <sensor_msgs/PointCloud2.h>
 #include <pcl_conversions/pcl_conversions.h>
 
-#define HESAI_WITH_CAMERA
 #include "hesaiLidarSDK.h"
 using namespace std;
 
