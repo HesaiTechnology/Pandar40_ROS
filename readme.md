@@ -1,11 +1,14 @@
-## Clone
+## Dependency
 ```
-mkdir -p rosworkspace/src ; cd rosworkspace/src
-git clone https://github.com/HesaiTechnology/HesaiLidar-ros.git --recursive
+1. ROS
+2. sudo apt install libpcap-dev libyaml-cpp-dev
 ```
 
 ## Build
 ```
+mkdir -p rosworkspace/src ; cd rosworkspace/src
+git clone https://github.com/HesaiTechnology/HesaiLidar-ros.git --recursive
+cd ../
 catkin_make
 ```
 
