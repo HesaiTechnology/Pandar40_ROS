@@ -13,13 +13,13 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 set(Camera_Enable ON)
-add_subdirectory(src/HesaiLidarSDK)
 
 find_package( Boost REQUIRED )
 find_package(PCL REQUIRED )
 
 catkin_package()
 
+add_subdirectory(src/HesaiLidarSDK)
 add_executable(hesai_lidar_node 
 	src/main.cc
 )
