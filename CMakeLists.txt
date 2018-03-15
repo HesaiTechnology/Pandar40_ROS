@@ -11,11 +11,10 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
   sensor_msgs
 )
-
-set(Camera_Enable ON)
-
 find_package( Boost REQUIRED )
 find_package(PCL REQUIRED )
+
+
 
 catkin_package()
 
