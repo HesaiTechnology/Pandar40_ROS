@@ -10,6 +10,7 @@ mkdir -p rosworkspace/src ; cd rosworkspace/src
 git clone https://github.com/HesaiTechnology/HesaiLidar-ros.git --recursive
 cd ../
 catkin_make --cmake-args -DCamera_Enable=ON
+source ./devel/setup.sh
 ```
 
 ## Run
