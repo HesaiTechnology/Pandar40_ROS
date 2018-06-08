@@ -23,7 +23,6 @@ add_executable(hesai_lidar_node
 	src/main.cc
 )
 
-add_definitions("-DHESAI_WITH_CAMERA")
 include_directories(
   src/HesaiLidarSDK/include
   ${PCL_INCLUDE_DIRS}
