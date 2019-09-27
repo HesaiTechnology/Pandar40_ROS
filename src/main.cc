@@ -55,21 +55,6 @@ public:
                       NULL, (HesaiLidarRawDataSturct)laserReturnType, laserCount, (HesaiLidarPCLDataType)pclDataType);
     }
 
-    else
-    {
-      imgPublishers[0] = it.advertise("/pandora_camera0", 1);
-      imgPublishers[1] = it.advertise("/pandora_camera1", 1);
-      imgPublishers[2] = it.advertise("/pandora_camera2", 1);
-      imgPublishers[3] = it.advertise("/pandora_camera3", 1);
-      imgPublishers[4] = it.advertise("/pandora_camera4", 1);
-      hsdk = new HesaiLidarSDK(serverIp, serverPort, calibrationFile,
-            boost::bind(&HesaiLidarClient::cameraCallback, this, _1, _2, _3),
-            lidarRecvPort, 
-            gpsPort, startAngle,      
-            lidarCorrectionFile,
-            boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2),
-            NULL, (HesaiLidarRawDataSturct)laserReturnType, laserCount, (HesaiLidarPCLDataType)pclDataType);
-    }
     hsdk->start();
   }
 
