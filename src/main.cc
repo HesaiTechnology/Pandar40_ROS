@@ -50,7 +50,7 @@ public:
     else if(serverIp.empty())
     {
       
-      hsdk = new HesaiLidarSDK(lidarRecvPort, gpsPort, lidarCorrectionFile,
+      hsdk = new HesaiLidarSDK(lidarRecvPort, gpsPort, startAngle, lidarCorrectionFile,
                       boost::bind(&HesaiLidarClient::lidarCallback, this, _1, _2),
                       NULL, (HesaiLidarRawDataSturct)laserReturnType, laserCount, (HesaiLidarPCLDataType)pclDataType);
     }
