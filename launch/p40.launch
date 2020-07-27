@@ -1,9 +1,9 @@
 <launch>
 	<arg name="pcap_file"  default=""/>
-	<arg name="server_ip" default=""/>
+	<arg name="server_ip" default="192.168.1.201"/>
 	<arg name="server_port"  default="9870"/>
-	<arg name="lidar_recv_port"  default="8080"/>
-	<arg name="gps_port"  default="8308"/>
+	<arg name="lidar_recv_port"  default="2368"/>
+	<arg name="gps_port"  default="10110"/>
 	<arg name="start_angle"  default="0"/>
 	<arg name="laser_return_type"  default="0"/>
 	<arg name="laser_count"  default="40"/>
