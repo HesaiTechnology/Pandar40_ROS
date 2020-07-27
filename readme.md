@@ -7,7 +7,7 @@
 ## Build
 ```
 mkdir -p rosworkspace/src ; cd rosworkspace/src
-git clone https://github.com/HesaiTechnology/HesaiLidar-ROS.git --recursive
+git clone https://github.com/HesaiTechnology/HesaiLidar_ROS.git --recursive
 cd ../
 catkin_make --cmake-args -DCamera_Enable=ON
 source ./devel/setup.sh
@@ -17,11 +17,6 @@ source ./devel/setup.sh
 ### Pandar40
 ```
 roslaunch hesai_lidar p40.launch
-```
-
-### Pandar40P
-```
-roslaunch hesai_lidar p40p.launch
 ```
 
 ### Pandora
