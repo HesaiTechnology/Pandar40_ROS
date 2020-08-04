@@ -7,7 +7,7 @@
 ## Build
 ```
 mkdir -p rosworkspace/src ; cd rosworkspace/src
-git clone https://github.com/HesaiTechnology/HesaiLidar_ROS.git --recursive
+git clone https://github.com/HesaiTechnology/Pandar40_ROS.git --recursive
 cd ../
 catkin_make
 source ./devel/setup.sh
